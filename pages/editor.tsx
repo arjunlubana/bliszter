@@ -65,23 +65,21 @@ const Editor: NextPage = () => {
   // };
 
   return (
-    <div className="container">
-      <ReactMde
-        value={value}
-        onChange={setValue}
-        selectedTab={selectedTab}
-        onTabChange={setSelectedTab}
-        generateMarkdownPreview={(markdown) =>
-          Promise.resolve(converter.makeHtml(markdown))
-        }
-        loadSuggestions={loadSuggestions}
-        childProps={{
-          writeButton: {
-            tabIndex: -1,
-          },
-        }}
-      />
-    </div>
+    <ReactMde
+      value={value}
+      onChange={setValue}
+      selectedTab={selectedTab}
+      onTabChange={setSelectedTab}
+      generateMarkdownPreview={(markdown) =>
+        Promise.resolve(converter.makeHtml(markdown))
+      } 
+      loadSuggestions={loadSuggestions}
+      childProps={{
+        writeButton: {
+          tabIndex: -1,
+        },
+      }}
+    />
   );
 };
 
