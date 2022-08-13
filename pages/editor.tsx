@@ -1,5 +1,6 @@
 import React from "react";
 import type { NextPage } from "next";
+import Link from "next/link";
 import ReactMde, { Suggestion, SaveImageHandler } from "react-mde";
 import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
@@ -65,6 +66,7 @@ const Editor: NextPage = () => {
   // };
 
   return (
+    <>
     <ReactMde
       value={value}
       onChange={setValue}
@@ -80,6 +82,10 @@ const Editor: NextPage = () => {
         },
       }}
     />
+    <Link href="/">
+      <a>Back Home</a>
+    </Link>
+    </>
   );
 };
 

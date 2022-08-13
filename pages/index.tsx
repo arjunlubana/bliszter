@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Bliszter</h1>
-        <Link href="/mde">
+        <Link href="/editor">
           <a >Markdown Editor</a>
         </Link>
       </main>
