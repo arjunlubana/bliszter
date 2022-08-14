@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { MediumPublishedArticle } from "../../../lib/interfaces/medium";
+import { MediumPublishedArticle } from "../../../interfaces/medium";
 
 export default async function handler(
   req: NextApiRequest,
