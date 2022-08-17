@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
   gql,
 } from "@apollo/client";
 
@@ -23,6 +22,10 @@ export default async function handler(
             _id
             username
             name
+            publication {
+              _id
+              title
+            }
           }
         }
       `,
