@@ -5,7 +5,6 @@ import React from "react";
 import Session from "supertokens-node/recipe/session";
 import supertokensNode from "supertokens-node";
 import { backendConfig } from "../supertokens/backendConfig";
-import ThirdPartyEmailPassword from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
 export async function getServerSideProps(context: any) {
   // this runs on the backend, so we must call init on supertokens-node SDK
@@ -49,9 +48,7 @@ export async function getServerSideProps(context: any) {
 const ProtectedPage: NextPage = (props: any) => {
   let userId = props.userId;
   return (
-    <ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
       <div className={styles.container}>Your user id is {userId}</div>
-    </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
   );
 };
 
