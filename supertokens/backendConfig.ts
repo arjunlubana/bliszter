@@ -17,8 +17,7 @@ export const backendConfig = (): TypeInput => {
     recipeList: [
       ThirdPartyEmailPasswordNode.init({
         providers: [
-          // We have provided you with development keys which you can use for testing.
-          // IMPORTANT: Please replace them with your own OAuth keys for production use.
+          // Third Party Authentication providers
           ThirdPartyEmailPasswordNode.Google({
             clientId: `${process.env.GOOGLE_AUTH_CLIENT_ID}`,
             clientSecret: `${process.env.GOOGLE_AUTH_CLIENT_SECRET}`,
@@ -36,6 +35,49 @@ export const backendConfig = (): TypeInput => {
             },
           }),
         ],
+        override: {
+          apis: (originalImplementation) => {
+            return {
+              ...originalImplementation,
+              // override the email password sign up API
+              emailPasswordSignUpPOST: async function (input) {
+                if (
+                  originalImplementation.emailPasswordSignUpPOST === undefined
+                ) {
+                  throw Error("Should never come here");
+                }
+
+                let response =
+                  await originalImplementation.emailPasswordSignUpPOST(input);
+
+                if (response.status === "OK") {
+                  // TODO: some post sign up logic
+                  console.log(response.user)
+                }
+
+                return response;
+              },
+
+              // override the thirdparty sign in / up API
+              thirdPartySignInUpPOST: async function (input) {
+                if (
+                  originalImplementation.thirdPartySignInUpPOST === undefined
+                ) {
+                  throw Error("Should never come here");
+                }
+
+                let response =
+                  await originalImplementation.thirdPartySignInUpPOST(input);
+
+                if (response.status === "OK" && response.createdNewUser) {
+                  console.log(response.user)
+                }
+
+                return response;
+              },
+            };
+          },
+        },
       }),
       SessionNode.init(),
     ],

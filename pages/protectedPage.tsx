@@ -4,7 +4,7 @@ import React from "react";
 
 import Session from "supertokens-node/recipe/session";
 import supertokensNode from "supertokens-node";
-import { backendConfig } from "../config/backendConfig";
+import { backendConfig } from "../supertokens/backendConfig";
 import ThirdPartyEmailPassword from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 
 export async function getServerSideProps(context: any) {

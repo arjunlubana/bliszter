@@ -5,7 +5,7 @@ import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
 import Session from 'supertokens-auth-react/recipe/session'
 import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 
-import { frontendConfig } from "../config/frontendConfig";
+import { frontendConfig } from "../supertokens/frontendConfig";
 
 if (typeof window !== "undefined") {
   // we only want to call this init function on the frontend, so we check typeof window !== 'undefined'
