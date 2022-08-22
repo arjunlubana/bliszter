@@ -1,7 +1,7 @@
 import { superTokensNextWrapper } from "supertokens-node/nextjs";
 import { verifySession } from "supertokens-node/recipe/session/framework/express";
 import supertokens from "supertokens-node";
-import { backendConfig } from "../../config/backendConfig";
+import { backendConfig } from "../../../config/backendConfig";
 import NextCors from "nextjs-cors";
 
 supertokens.init(backendConfig());
@@ -14,7 +14,6 @@ export default async function user(req: any, res: any) {
     credentials: true,
     allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
   });
-
   // we first verify the session
   await superTokensNextWrapper(
     async (next) => {
