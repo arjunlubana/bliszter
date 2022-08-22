@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
+import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+
+import Logout from "../components/logout";
 import styles from "../styles/Home.module.css";
-import React from "react";
 
 const Home: NextPage = () => {
   return (
@@ -19,6 +21,10 @@ const Home: NextPage = () => {
         <Link href="/editor">
           <a>Markdown Editor</a>
         </Link>
+        <Link href="/protectedPage">
+          <a>Protected Pege</a>
+        </Link>
+        <Logout />
       </main>
       
       <footer className={styles.footer}>
