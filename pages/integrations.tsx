@@ -13,6 +13,8 @@ const Integrations: NextPage = () => {
       <div className={styles.container}>
         Integrations
         <AddDevto />
+        <AddHashnode />
+        <AddMedium />
       </div>
     </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
   );
