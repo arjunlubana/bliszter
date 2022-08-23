@@ -1,6 +1,5 @@
 import ThirdPartyEmailPasswordNode from "supertokens-node/recipe/thirdpartyemailpassword";
 import SessionNode from "supertokens-node/recipe/session";
-import { createUser } from "../redis/createUser";
 import { appInfo } from "./appInfo";
 import { TypeInput } from "supertokens-node/types";
 
@@ -36,49 +35,6 @@ export const backendConfig = (): TypeInput => {
             },
           }),
         ],
-        override: {
-          apis: (originalImplementation) => {
-            return {
-              ...originalImplementation,
-              // override the email password sign up API
-              emailPasswordSignUpPOST: async function (input) {
-                if (
-                  originalImplementation.emailPasswordSignUpPOST === undefined
-                ) {
-                  throw Error("Should never come here");
-                }
-
-                let response =
-                  await originalImplementation.emailPasswordSignUpPOST(input);
-
-                if (response.status === "OK") {
-                  // TODO: some post sign up logic
-                  await createUser(response.user.id);
-                }
-
-                return response;
-              },
-
-              // override the thirdparty sign in / up API
-              thirdPartySignInUpPOST: async function (input) {
-                if (
-                  originalImplementation.thirdPartySignInUpPOST === undefined
-                ) {
-                  throw Error("Should never come here");
-                }
-
-                let response =
-                  await originalImplementation.thirdPartySignInUpPOST(input);
-
-                if (response.status === "OK" && response.createdNewUser) {
-                  await createUser(response.user.id);
-                }
-
-                return response;
-              },
-            };
-          },
-        },
       }),
       SessionNode.init(),
     ],
