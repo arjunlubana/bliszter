@@ -3,11 +3,9 @@ import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import ThirdPartyEmailPassword from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import Logout from "../components/logout";
 import styles from "../styles/Home.module.css";
 import DeleteUser from "../components/deleteUser";
-import ProtectedPage from "./protectedPage";
 
 const Home: NextPage = () => {
   return (
@@ -29,9 +27,6 @@ const Home: NextPage = () => {
         <Logout />
         <DeleteUser />
       </main>
-      <ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
-        <ProtectedPage />
-      </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
 
       <footer className={styles.footer}>
         <a
