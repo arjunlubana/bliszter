@@ -1,5 +1,6 @@
 import ThirdPartyEmailPasswordNode from "supertokens-node/recipe/thirdpartyemailpassword";
 import SessionNode from "supertokens-node/recipe/session";
+import { createUser } from "../redis/createUser";
 import { appInfo } from "./appInfo";
 import { TypeInput } from "supertokens-node/types";
 
@@ -52,7 +53,7 @@ export const backendConfig = (): TypeInput => {
 
                 if (response.status === "OK") {
                   // TODO: some post sign up logic
-                  console.log(response.user)
+                  await createUser(response.user.id);
                 }
 
                 return response;
@@ -70,7 +71,7 @@ export const backendConfig = (): TypeInput => {
                   await originalImplementation.thirdPartySignInUpPOST(input);
 
                 if (response.status === "OK" && response.createdNewUser) {
-                  console.log(response.user)
+                  await createUser(response.user.id);
                 }
 
                 return response;
