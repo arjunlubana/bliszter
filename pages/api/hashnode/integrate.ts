@@ -16,7 +16,7 @@ export default async function integrate(req: any, res: any) {
   const hashnode_token = req.body.hashnode_token;
 
   await UserMetadata.updateUserMetadata(userId, {
-    hashnode_token: "Hello"
+    hashnode_token: hashnode_token
   });
   res.json({ message: "successfully integration with hashnode" });
 }
