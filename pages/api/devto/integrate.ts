@@ -13,9 +13,11 @@ export default async function integrate(req: any, res: any) {
   );
   const session = (req as SessionRequest).session;
   const userId = session!.getUserId();
+  const dev_to_token = req.body.dev_to_token
 
   await UserMetadata.updateUserMetadata(userId, {
-    integrations: req.body,
+    dev_to_token: "Hello"
   });
-  res.json({ message: "successfully integration with devto" });
+  const { metadata } = await UserMetadata.getUserMetadata(userId);
+  res.json({ message: "successfully integration with devto", metadata });
 }

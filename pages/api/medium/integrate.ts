@@ -13,9 +13,10 @@ export default async function integrate(req: any, res: any) {
   );
   const session = (req as SessionRequest).session;
   const userId = session!.getUserId();
-
+  const medium_token = req.body.medium_token;
+  
   await UserMetadata.updateUserMetadata(userId, {
-    integrations: req.body,
+    medium_token: "Hello"
   });
   res.json({ message: "successfully integration with medium" });
 }
