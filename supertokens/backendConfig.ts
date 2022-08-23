@@ -1,5 +1,7 @@
 import ThirdPartyEmailPasswordNode from "supertokens-node/recipe/thirdpartyemailpassword";
 import SessionNode from "supertokens-node/recipe/session";
+import UserMetadata from "supertokens-node/recipe/usermetadata";
+
 import { appInfo } from "./appInfo";
 import { TypeInput } from "supertokens-node/types";
 
@@ -37,6 +39,7 @@ export const backendConfig = (): TypeInput => {
         ],
       }),
       SessionNode.init(),
+      UserMetadata.init(),
     ],
     isInServerlessEnv: true,
   };
