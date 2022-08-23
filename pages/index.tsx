@@ -24,6 +24,9 @@ const Home: NextPage = () => {
         <Link href="/protectedPage">
           <a>Protected Pege</a>
         </Link>
+        <Link href="/integrations">
+          <a>integrations</a>
+        </Link>
         <Logout />
         <DeleteUser />
       </main>
