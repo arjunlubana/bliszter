@@ -2,11 +2,11 @@ import { superTokensNextWrapper } from 'supertokens-node/nextjs'
 import { middleware } from 'supertokens-node/framework/express'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Request, Response } from 'express';
-import Supertokens from 'supertokens-node'
+import supertokens from 'supertokens-node'
 import { backendConfig } from '../../../supertokens/backendConfig'
 import NextCors from "nextjs-cors";
 
-Supertokens.init(backendConfig())
+supertokens.init(backendConfig())
 
 export default async function superTokens(
   req: NextApiRequest & Request,
@@ -18,7 +18,7 @@ export default async function superTokens(
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
     origin: "http://localhost:3000",
     credentials: true,
-    allowedHeaders: ["content-type", ...Supertokens.getAllCORSHeaders()],
+    allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
   });
 
   await superTokensNextWrapper(
