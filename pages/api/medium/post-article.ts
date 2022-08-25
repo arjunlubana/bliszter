@@ -13,12 +13,10 @@ export default async function handler(
   };
 
   let bodyContent = JSON.stringify({
-    title: "Liverpool FC",
-    contentFormat: "html",
-    content: "<h1>Liverpool FC</h1><p>You’ll never walk alone.</p>",
-    canonicalUrl: "http://jamietalbot.com/posts/liverpool-fc",
-    tags: ["football", "sport", "Liverpool"],
-    publishStatus: "public",
+    title: req.body.markdown,
+    contentFormat: "markdown",
+    content:req.body.markdown,
+    tags: ["redis", "hackathon"],
   });
 
   let reqOptions = {

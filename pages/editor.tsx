@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import ReactMde, { Suggestion, SaveImageHandler } from "react-mde";
 import * as Showdown from "showdown";
+import { poster } from "../utils";
 import "react-mde/lib/styles/css/react-mde-all.css";
 
 const loadSuggestions = async (text: string) => {
@@ -65,26 +66,41 @@ const Editor: NextPage = () => {
   //   return true;
   // };
 
+  const onPublish = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const formData = Object.fromEntries(form.entries());
+    formData.markdown = value
+    poster("/api/devto/post-article", formData);
+    poster("/api/hashnode/post-article", formData);
+    poster("/api/medium/post-article", formData);
+  };
+
   return (
     <>
-    <ReactMde
-      value={value}
-      onChange={setValue}
-      selectedTab={selectedTab}
-      onTabChange={setSelectedTab}
-      generateMarkdownPreview={(markdown) =>
-        Promise.resolve(converter.makeHtml(markdown))
-      } 
-      loadSuggestions={loadSuggestions}
-      childProps={{
-        writeButton: {
-          tabIndex: -1,
-        },
-      }}
-    />
-    <Link href="/">
-      <a>Back Home</a>
-    </Link>
+      <form onSubmit={onPublish}>
+        <label htmlFor="title">Title</label>
+        <input type="text" name="title" />
+        <input type="submit" value="Publish" />
+      </form>
+      <ReactMde
+        value={value}
+        onChange={setValue}
+        selectedTab={selectedTab}
+        onTabChange={setSelectedTab}
+        generateMarkdownPreview={(markdown) =>
+          Promise.resolve(converter.makeHtml(markdown))
+        }
+        loadSuggestions={loadSuggestions}
+        childProps={{
+          writeButton: {
+            tabIndex: -1,
+          },
+        }}
+      />
+      <Link href="/">
+        <a>Back Home</a>
+      </Link>
     </>
   );
 };
