@@ -12,11 +12,10 @@ export default async function handler(
 
   let bodyContent = JSON.stringify({
     article: {
-      title: "Bliszter",
+      title: req.body.title,
       published: true,
-      body_markdown: "A new way to post your articles to multiple platforms",
+      body_markdown: req.body.markdown,
       tags: ["redis", "hackathon"],
-      series: "Hackathon",
     },
   });
 

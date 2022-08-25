@@ -1,9 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import {
-  ApolloClient,
-  InMemoryCache,
-  gql,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,14 +16,18 @@ export default async function handler(
   client
     .mutate({
       mutation: gql`
-        mutation {
+        mutation CREATE_POST($title: String!, $body: String!){
           createPublicationStory(
             input: {
-              title: "Introducing bliszter"
-              contentMarkdown: "Bliszter will help you manage blogs from diffrrent platform"
+              title: $title
+              contentMarkdown: $body
               slug: "bliszter project"
               tags: [
-                { _id: 3245454365546546, slug: "bliszter", name: "bliszter" }
+                { 
+                  _id: 3245454365546546, 
+                  slug: "bliszter", 
+                  name: "bliszter" 
+                }
               ]
             }
             publicationId: "605590e663a05a21443f18ba"
@@ -43,6 +43,10 @@ export default async function handler(
           }
         }
       `,
+      variables: {
+        "title": req.body.title,
+        "body": req.body.markdown
+      },
     })
     .then((result) => {
       console.log(result);
