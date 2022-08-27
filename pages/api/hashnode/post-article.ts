@@ -1,5 +1,6 @@
 import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 import { SessionRequest } from "supertokens-node/framework/express";
+import UserMetadata from "supertokens-node/recipe/usermetadata";
 import authorize from "../../../supertokens/authorize";
 
 export default async function handler(
@@ -7,11 +8,16 @@ export default async function handler(
   res: any
 ) {
   await authorize(req, res);
+
+  const session = (req as SessionRequest).session;
+  const userId = session!.getUserId();
+  const { metadata } = await UserMetadata.getUserMetadata(userId);
+
   const client = new ApolloClient({
     uri: "https://api.hashnode.com/",
     cache: new InMemoryCache(),
     headers: {
-      Authorization: `${process.env.HASHNODE_ACCESS_TOKEN}`,
+      Authorization: `${metadata.hashnode_token}`,
     },
   });
 
