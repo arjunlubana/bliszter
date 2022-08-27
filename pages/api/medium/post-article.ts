@@ -1,11 +1,14 @@
 import axios from "axios";
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
+import { SessionRequest } from "supertokens-node/framework/express";
 import { MediumPublishedArticle } from "../../../interfaces/medium";
+import authorize from "../../../supertokens/authorize";
 
 export default async function handler(
-  req: NextApiRequest,
+  req: SessionRequest,
   res: NextApiResponse<MediumPublishedArticle>
 ) {
+  await authorize(req, res);
   let headersList = {
     Accept: "*/*",
     Authorization: `Bearer ${process.env.MEDIUM_API_TOKEN}`,

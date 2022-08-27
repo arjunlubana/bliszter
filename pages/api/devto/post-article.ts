@@ -1,10 +1,12 @@
 import axios from "axios";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { SessionRequest } from "supertokens-node/framework/express";
+import authorize from "../../../supertokens/authorize";
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<any>
+  req: SessionRequest,
+  res: any
 ) {
+  await authorize(req, res);
   let headersList = {
     "Content-Type": "application/json",
     "api-key": `${process.env.DEV_TO_API_TOKEN}`,

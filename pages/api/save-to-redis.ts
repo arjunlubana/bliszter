@@ -1,11 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { SessionRequest } from "supertokens-node/framework/express";
 import { createArticle } from "../../redis/schema/article";
+import authorize from "../../supertokens/authorize";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  console.log(req.body)
+export default async function handler(req: SessionRequest, res: any) {
+  await authorize(req, res);
   const result = await createArticle({
     userId: "fkdjfjd",
     title: req.body.title,
@@ -14,6 +12,5 @@ export default async function handler(
     hashnode_url: req.body.hashnode_url,
     devto_url: req.body.devto_url,
   });
-  console.log(result);
   res.status(200).json(result);
 }

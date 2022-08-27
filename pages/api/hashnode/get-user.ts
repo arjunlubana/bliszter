@@ -1,14 +1,16 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import {
   ApolloClient,
   InMemoryCache,
   gql,
 } from "@apollo/client";
+import { SessionRequest } from "supertokens-node/framework/express";
+import authorize from "../../../supertokens/authorize";
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  req: SessionRequest,
+  res: any
 ) {
+  await authorize(req, res);
   const client = new ApolloClient({
     uri: "https://api.hashnode.com/",
     cache: new InMemoryCache(),

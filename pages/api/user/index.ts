@@ -1,12 +1,12 @@
-import { superTokensNextWrapper } from "supertokens-node/nextjs";
-import { verifySession } from "supertokens-node/recipe/session/framework/express";
 import supertokens from "supertokens-node";
 import { backendConfig } from "../../../supertokens/backendConfig";
 import NextCors from "nextjs-cors";
+import { SessionRequest } from "supertokens-node/framework/express";
+import authorize from "../../../supertokens/authorize";
 
 supertokens.init(backendConfig());
 
-export default async function user(req: any, res: any) {
+export default async function user(req: SessionRequest, res: any) {
   // NOTE: We need CORS only if we are querying the APIs from a different origin
   await NextCors(req, res, {
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
@@ -14,14 +14,7 @@ export default async function user(req: any, res: any) {
     credentials: true,
     allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
   });
-  // we first verify the session
-  await superTokensNextWrapper(
-    async (next) => {
-      return await verifySession()(req, res, next);
-    },
-    req,
-    res
-  );
+  await authorize(req, res);
   // if it comes here, it means that the session verification was successful
 
   return res.json({
