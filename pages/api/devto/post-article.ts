@@ -3,10 +3,7 @@ import { SessionRequest } from "supertokens-node/framework/express";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import authorize from "../../../supertokens/authorize";
 
-export default async function handler(
-  req: SessionRequest,
-  res: any
-) {
+export default async function handler(req: SessionRequest, res: any) {
   await authorize(req, res);
 
   const session = (req as SessionRequest).session;
@@ -33,7 +30,10 @@ export default async function handler(
     headers: headersList,
     data: bodyContent,
   };
-
-  let response = await axios.request(reqOptions);
-  res.status(200).json(response.data);
+  try {
+    let response = await axios.request(reqOptions);
+    res.status(200).json(response.data);
+  } catch (error) {
+    res.status(200).json({ message: "failesd to publish to devto" });
+  }
 }

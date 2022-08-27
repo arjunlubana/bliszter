@@ -2,12 +2,11 @@ import axios from "axios";
 import type { NextApiResponse } from "next";
 import { SessionRequest } from "supertokens-node/framework/express";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
-import { MediumPublishedArticle } from "../../../interfaces/medium";
 import authorize from "../../../supertokens/authorize";
 
 export default async function handler(
   req: SessionRequest,
-  res: NextApiResponse<MediumPublishedArticle>
+  res: NextApiResponse
 ) {
   await authorize(req, res);
 
@@ -34,7 +33,10 @@ export default async function handler(
     headers: headersList,
     data: bodyContent,
   };
-
-  let response = await axios.request(reqOptions);
-  res.status(200).json(response.data.data);
+  try {
+    let response = await axios.request(reqOptions);
+    res.status(200).json(response.data.data);
+  } catch (error) {
+    res.status(200).json({ message: "failesd to publish to medium" });
+  }
 }
