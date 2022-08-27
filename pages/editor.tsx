@@ -6,6 +6,8 @@ import * as Showdown from "showdown";
 import { poster } from "../utils";
 import "react-mde/lib/styles/css/react-mde-all.css";
 
+import ThirdPartyEmailPassword from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+
 const loadSuggestions = async (text: string) => {
   return new Promise<Suggestion[]>((accept, reject) => {
     setTimeout(() => {
@@ -83,7 +85,7 @@ const Editor: NextPage = () => {
     });
   };
   return (
-    <>
+    <ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
       <form onSubmit={onPublish}>
         <label htmlFor="title">Title</label>
         <input type="text" name="title" />
@@ -107,7 +109,7 @@ const Editor: NextPage = () => {
       <Link href="/">
         <a>Back Home</a>
       </Link>
-    </>
+    </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
   );
 };
 
