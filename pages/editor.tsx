@@ -66,16 +66,22 @@ const Editor: NextPage = () => {
   //   return true;
   // };
 
-  const onPublish = (e) => {
+  const onPublish = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const formData = Object.fromEntries(form.entries());
-    formData.markdown = value
-    poster("/api/devto/post-article", formData);
-    poster("/api/hashnode/post-article", formData);
-    poster("/api/medium/post-article", formData);
+    formData.markdown = value;
+    const devto = await poster("/api/devto/post-article", formData);
+    const hashnode = await poster("/api/hashnode/post-article", formData);
+    const medium = await poster("/api/medium/post-article", formData);
+    await poster("/api/save-to-redis", {
+      title: formData.title,
+      markdown: formData.markdown,
+      medium_url: medium.url,
+      hashnode_url: hashnode.url,
+      devto_url: devto.url,
+    });
   };
-
   return (
     <>
       <form onSubmit={onPublish}>
