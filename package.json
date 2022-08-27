@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@chakra-ui/react": "^2.2.9",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "axios": "^0.27.2",
+    "framer-motion": "^6",
     "graphql": "^16.5.0",
     "next": "12.2.4",
     "nextjs-cors": "^2.1.1",

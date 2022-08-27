@@ -1,9 +1,10 @@
-import "../styles/globals.css";
-import React from "react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
+import React from "react";
 import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
-import Session from 'supertokens-auth-react/recipe/session'
-import { redirectToAuth } from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
+import Session from "supertokens-auth-react/recipe/session";
+import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import "../styles/globals.css";
 
 import { frontendConfig } from "../supertokens/frontendConfig";
 
@@ -42,9 +43,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     return null;
   }
   return (
-    <SuperTokensWrapper>
-      <Component {...pageProps} />
-    </SuperTokensWrapper>
+    <ChakraProvider>
+      <SuperTokensWrapper>
+        <Component {...pageProps} />
+      </SuperTokensWrapper>
+    </ChakraProvider>
   );
 }
 
