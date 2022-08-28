@@ -107,9 +107,6 @@ const Editor: NextPageWithLayout = () => {
           },
         }}
       />
-      <Link href="/">
-        <a>Back Home</a>
-      </Link>
     </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
   );
 };
