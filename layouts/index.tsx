@@ -1,6 +1,8 @@
-import { ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
-import Header from "../components/header";
+import { ChakraProvider, Divider, Grid, GridItem } from "@chakra-ui/react";
+import ThirdPartyEmailPassword from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import Footer from "../components/footer";
+import Header from "../components/header";
+import LoginLogout from "../components/login-logout";
 
 export default function Layout({ children }) {
   return (
@@ -9,20 +11,29 @@ export default function Layout({ children }) {
         templateAreas={`"header header"
                   "main main"
                   "footer footer"`}
-        gridTemplateRows={"50px 1fr 30px"}
+        gridTemplateRows={"10vh 1fr 15vh"}
         gridTemplateColumns={"150px 1fr"}
         h="100vh"
-        gap="1"
         color="blackAlpha.700"
         fontWeight="bold"
       >
-        <GridItem pl="2" bg="gray.100" area={"header"}>
-          <Header />
+        <GridItem
+          pl="2"
+          bg="gray.100"
+          area={"header"}
+          position={"fixed"}
+          w={"100%"}
+          zIndex="100"
+        >
+          <Header>
+            <ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
+              <LoginLogout />
+            </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
+          </Header>
         </GridItem>
-        <GridItem area={"main"}>
-          {children}
-        </GridItem>
-        <GridItem pl="2" bg="gray.300" area={"footer"}>
+        <GridItem area={"main"}>{children}</GridItem>
+        <GridItem area={"footer"} p={"1em"}>
+          <Divider />
           <Footer />
         </GridItem>
       </Grid>

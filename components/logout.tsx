@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { signOut } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import { Button } from "@chakra-ui/react";
 
 export default function Logout() {
   async function onLogout() {
@@ -7,8 +7,8 @@ export default function Logout() {
     window.location.href="/"
   }
   return (
-    <button onClick={onLogout}>
+    <Button onClick={onLogout}>
       Logout
-    </button>
+    </Button>
   );
 }

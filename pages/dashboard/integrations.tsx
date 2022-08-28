@@ -17,49 +17,50 @@ import {
 const Integrations: NextPageWithLayout = () => {
   return (
     <ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
-      <Heading size="md" textAlign="center">Integrations</Heading>
-      <Accordion allowToggle>
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                Dev Community
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <AddDevto />
-          </AccordionPanel>
-        </AccordionItem>
+      <Box m={"2em"}>
+        <Accordion allowToggle>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  Dev Community
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <AddDevto />
+            </AccordionPanel>
+          </AccordionItem>
 
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                Hashnode
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <AddHashnode />
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                Medium
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <AddMedium />
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  Hashnode
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <AddHashnode />
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  Medium
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <AddMedium />
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      </Box>
     </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
   );
 };

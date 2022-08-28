@@ -1,5 +1,4 @@
-import { Button, Input, Stack, useToast } from "@chakra-ui/react";
-import Link from "next/link";
+import { Button, Input, useToast } from "@chakra-ui/react";
 import React, { ReactElement, useState } from "react";
 import ReactMde, { Suggestion } from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";
@@ -9,12 +8,6 @@ import Layout from "../../layouts";
 import DashboardLayout from "../../layouts/dashboard";
 import { poster } from "../../utils";
 import type { NextPageWithLayout } from "../_app";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
 
 const loadSuggestions = async (text: string) => {
   return new Promise<Suggestion[]>((accept, reject) => {
