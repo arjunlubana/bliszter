@@ -27,7 +27,11 @@ export default async function handler(req: SessionRequest, res: any) {
               contentMarkdown: $body
               slug: "bliszter project"
               tags: [
-                { _id: 3245454365546546, slug: "bliszter", name: "bliszter" }
+                { 
+                  _id: 3245454365546546, 
+                  slug: "bliszter", 
+                  name: "bliszter" 
+                }
               ]
             }
             publicationId: "605590e663a05a21443f18ba"
