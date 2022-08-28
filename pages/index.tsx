@@ -2,10 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactElement } from "react";
-import DeleteUser from "../components/deleteUser";
-import Logout from "../components/logout";
 import Layout from "../layouts";
-import NestedLayout from "../layouts/editor-layout";
 import type { NextPageWithLayout } from "./_app";
 
 const Home: NextPageWithLayout = () => {
@@ -19,17 +16,9 @@ const Home: NextPageWithLayout = () => {
       
       <main>
         <h1>Bliszter</h1>
-        <Link href="/editor">
-          <a>Markdown Editor</a>
+        <Link href="/dashboard">
+          <a>Dashboard</a>
         </Link>
-        <Link href="/protectedPage">
-          <a>Protected Pege</a>
-        </Link>
-        <Link href="/integrations">
-          <a>integrations</a>
-        </Link>
-        <Logout />
-        <DeleteUser />
       </main>
 
       <footer>
@@ -51,7 +40,7 @@ const Home: NextPageWithLayout = () => {
 Home.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      <NestedLayout>{page}</NestedLayout>
+      {page}
     </Layout>
   );
 };
