@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }) {
       <GridItem colSpan={1} bg="gray.100" >
         <Sidebar />
       </GridItem>
-      <GridItem colStart={2} colEnd={7} bg="papayawhip">
+      <GridItem colStart={2} colEnd={7} mr="1em">
         {children}
       </GridItem>
     </Grid>
