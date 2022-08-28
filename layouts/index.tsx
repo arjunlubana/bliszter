@@ -19,7 +19,7 @@ export default function Layout({ children }) {
         <GridItem pl="2" bg="gray.100" area={"header"}>
           <Header />
         </GridItem>
-        <GridItem bg="green.300" area={"main"}>
+        <GridItem area={"main"}>
           {children}
         </GridItem>
         <GridItem pl="2" bg="gray.300" area={"footer"}>
