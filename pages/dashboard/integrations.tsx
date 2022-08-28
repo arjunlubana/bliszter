@@ -7,12 +7,10 @@ import Layout from "../../layouts";
 import DashboardLayout from "../../layouts/dashboard";
 import type { NextPageWithLayout } from "../_app";
 
-import styles from "../styles/Home.module.css";
-
 const Integrations: NextPageWithLayout = () => {
   return (
     <ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
-      <div className={styles.container}>
+      <div>
         Integrations
         <AddDevto />
         <AddHashnode />
