@@ -1,18 +1,30 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputRightElement,
+  useToast,
+} from "@chakra-ui/react";
 import React, { FormEvent } from "react";
 import { poster } from "../utils";
 
 export default function AddDevto() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
-
+  const toast = useToast();
+  
   const onIntegration = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const formData = Object.fromEntries(form.entries());
     console.log(formData);
-    await poster("/api/devto/integrate", formData);
+    const response = await poster("/api/devto/integrate", formData);
+    toast({
+      ...response,
+      duration: 3000,
+      isClosable: true,
+    });
   };
   return (
     <form onSubmit={onIntegration}>

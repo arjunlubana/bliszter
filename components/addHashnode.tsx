@@ -1,5 +1,5 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Button, Input, InputGroup, InputRightElement, Toast, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FormEvent } from "react";
 import { poster } from "../utils";
@@ -10,13 +10,20 @@ export default function AddHashnode() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
+  const toast = useToast()
+
   const onIntegration = async (e) => {
     e.preventDefault();
     let data = {
       username,
       hashnodeToken,
     };
-    await poster("/api/hashnode/integrate", data);
+    const response = await poster("/api/hashnode/integrate", data);
+    toast({
+      ...response,
+      duration: 3000,
+      isClosable: true,
+    });
   };
   return (
     <form onSubmit={onIntegration}>
