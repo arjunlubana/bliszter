@@ -7,7 +7,7 @@ export default function Layout({ children }) {
     <ChakraProvider>
       <Grid
         templateAreas={`"header header"
-                  "nav main"
+                  "main main"
                   "footer footer"`}
         gridTemplateRows={"50px 1fr 30px"}
         gridTemplateColumns={"150px 1fr"}
@@ -18,9 +18,6 @@ export default function Layout({ children }) {
       >
         <GridItem pl="2" bg="gray.100" area={"header"}>
           <Header />
-        </GridItem>
-        <GridItem pl="2" bg="pink.300" area={"nav"}>
-          Nav
         </GridItem>
         <GridItem pl="2" bg="green.300" area={"main"}>
           {children}
