@@ -1,5 +1,6 @@
 import { ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
 import Header from "../components/header";
+import Footer from "../components/footer";
 
 export default function Layout({ children }) {
   return (
@@ -24,8 +25,8 @@ export default function Layout({ children }) {
         <GridItem pl="2" bg="green.300" area={"main"}>
           {children}
         </GridItem>
-        <GridItem pl="2" bg="blue.300" area={"footer"}>
-          Footer
+        <GridItem pl="2" bg="gray.300" area={"footer"}>
+          <Footer />
         </GridItem>
       </Grid>
     </ChakraProvider>
