@@ -21,14 +21,14 @@ export default async function handler(
   };
 
   let bodyContent = JSON.stringify({
-    title: req.body.markdown,
+    title: req.body.title,
     contentFormat: "markdown",
     content: req.body.markdown,
     tags: ["redis", "hackathon"],
   });
 
   let reqOptions = {
-    url: `https://api.medium.com/v1/users/${process.env.MEDIUM_USER_ID}/posts`,
+    url: `https://api.medium.com/v1/users/${metadata.medium_user_id}/posts`,
     method: "POST",
     headers: headersList,
     data: bodyContent,

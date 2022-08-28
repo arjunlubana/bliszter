@@ -35,7 +35,6 @@ export default async function handler(req: SessionRequest, res: any) {
     res
       .status(200)
       .json({
-        ...response.data,
         title: "Published to Dev Community",
         status: "success",
       });

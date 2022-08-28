@@ -20,7 +20,7 @@ export default async function handler(req: SessionRequest, res: any) {
   try {
     const response = await client.mutate({
       mutation: gql`
-        mutation CREATE_POST($title: String!, $body: String!) {
+        mutation CREATE_POST($title: String!, $body: String!, $publicationId: String!) {
           createPublicationStory(
             input: {
               title: $title
@@ -34,7 +34,7 @@ export default async function handler(req: SessionRequest, res: any) {
                 }
               ]
             }
-            publicationId: "605590e663a05a21443f18ba"
+            publicationId: $publicationId
             hideFromHashnodeFeed: true
           ) {
             code
@@ -50,6 +50,7 @@ export default async function handler(req: SessionRequest, res: any) {
       variables: {
         title: req.body.title,
         body: req.body.markdown,
+        publicationId: metadata.hashnode_publication
       },
     });
     res.status(200).json({
