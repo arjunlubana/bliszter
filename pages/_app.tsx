@@ -1,19 +1,26 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import type { NextPage } from "next";
 import { AppProps } from "next/app";
+import type { ReactElement, ReactNode } from "react";
 import React from "react";
 import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
 import Session from "supertokens-auth-react/recipe/session";
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
-import "../styles/globals.css";
-
 import { frontendConfig } from "../supertokens/frontendConfig";
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
 
 if (typeof window !== "undefined") {
   // we only want to call this init function on the frontend, so we check typeof window !== 'undefined'
   SuperTokensReact.init(frontendConfig());
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   React.useEffect(() => {
     async function doRefresh() {
       // pageProps.fromSupertokens === 'needs-refresh' will be true
@@ -42,13 +49,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return null;
   }
-  return (
-    <ChakraProvider>
-      <SuperTokensWrapper>
+
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout ?? ((page) => page);
+  return getLayout(
+    <SuperTokensWrapper>
         <Component {...pageProps} />
-      </SuperTokensWrapper>
-    </ChakraProvider>
+    </SuperTokensWrapper>
   );
 }
-
 export default MyApp;
