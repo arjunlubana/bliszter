@@ -12,7 +12,7 @@ export default function AddHashnode() {
 
   const toast = useToast()
 
-  const onIntegration = async (e) => {
+  const onIntegration = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let data = {
       username,
