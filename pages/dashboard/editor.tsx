@@ -1,12 +1,13 @@
-import React from "react";
-import type { NextPage } from "next";
 import Link from "next/link";
-import ReactMde, { Suggestion, SaveImageHandler } from "react-mde";
-import * as Showdown from "showdown";
-import { poster } from "../utils";
+import React, { ReactElement } from "react";
+import ReactMde, { Suggestion } from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";
-
+import * as Showdown from "showdown";
 import ThirdPartyEmailPassword from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import Layout from "../../layouts";
+import DashboardLayout from "../../layouts/dashboard";
+import { poster } from "../../utils";
+import type { NextPageWithLayout } from "../_app";
 
 const loadSuggestions = async (text: string) => {
   return new Promise<Suggestion[]>((accept, reject) => {
@@ -40,7 +41,7 @@ const converter = new Showdown.Converter({
   strikethrough: true,
   tasklists: true,
 });
-const Editor: NextPage = () => {
+const Editor: NextPageWithLayout = () => {
   const [value, setValue] = React.useState("**Hello world!!!**");
   const [selectedTab, setSelectedTab] = React.useState<"write" | "preview">(
     "write"
@@ -112,5 +113,11 @@ const Editor: NextPage = () => {
     </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
   );
 };
-
+Editor.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      <DashboardLayout>{page}</DashboardLayout>
+    </Layout>
+  );
+};
 export default Editor;
