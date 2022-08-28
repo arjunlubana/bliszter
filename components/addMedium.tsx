@@ -6,15 +6,16 @@ import { poster } from "../utils";
 
 export default function AddMedium() {
   const [show, setShow] = React.useState(false);
+  const [mediumToken, setMediumToken] = React.useState("")
   const handleClick = () => setShow(!show);
   const toast = useToast()
   
   const onIntegration = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = new FormData(e.target);
-    const formData = Object.fromEntries(form.entries());
-    console.log(formData);
-    const response = await poster("/api/medium/integrate", formData);
+    let data = {
+      medium_token: mediumToken
+    }
+    const response = await poster("/api/medium/integrate", data);
     toast({
       ...response,
       duration: 3000,
@@ -29,6 +30,9 @@ export default function AddMedium() {
           pr="4.5rem"
           type={show ? "text" : "password"}
           placeholder="Your Integration Token"
+          onChange={(e) => {
+            setMediumToken(e.target.value);
+          }}
         />
         <InputRightElement width="3rem">
           <Button h="1.75rem" size="sm" onClick={handleClick}>

@@ -6,20 +6,23 @@ import {
   InputRightElement,
   useToast,
 } from "@chakra-ui/react";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { poster } from "../utils";
 
 export default function AddDevto() {
   const [show, setShow] = React.useState(false);
+  const [devToToken, setDevToToken] = useState("");
+
   const handleClick = () => setShow(!show);
   const toast = useToast();
-  
+
   const onIntegration = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = new FormData(e.target);
-    const formData = Object.fromEntries(form.entries());
-    console.log(formData);
-    const response = await poster("/api/devto/integrate", formData);
+    let data = {
+      dev_to_token: devToToken
+    }
+
+    const response = await poster("/api/devto/integrate", data);
     toast({
       ...response,
       duration: 3000,
@@ -33,6 +36,9 @@ export default function AddDevto() {
           pr="4.5rem"
           type={show ? "text" : "password"}
           placeholder="Your Integration Token"
+          onChange={(e) => {
+            setDevToToken(e.target.value);
+          }}
         />
         <InputRightElement width="3rem">
           <Button h="1.75rem" size="sm" onClick={handleClick}>
