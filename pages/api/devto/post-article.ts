@@ -32,8 +32,18 @@ export default async function handler(req: SessionRequest, res: any) {
   };
   try {
     let response = await axios.request(reqOptions);
-    res.status(200).json(response.data);
+    res
+      .status(200)
+      .json({
+        ...response.data,
+        title: "Published to Dev Community",
+        status: "success",
+      });
   } catch (error) {
-    res.status(200).json({ message: "failesd to publish to devto" });
+    res.status(200).json({
+      title: "Failed to publish article",
+      description: "We are unable to publish your article to Dev Community",
+      status: "error",
+    });
   }
 }

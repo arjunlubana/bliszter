@@ -35,8 +35,18 @@ export default async function handler(
   };
   try {
     let response = await axios.request(reqOptions);
-    res.status(200).json(response.data.data);
+    res
+      .status(200)
+      .json({
+        ...response.data,
+        title: "Published to Medium",
+        status: "success",
+      });
   } catch (error) {
-    res.status(200).json({ message: "failesd to publish to medium" });
+    res.status(200).json({
+      title: "Failed to publish article",
+      description: "We are unable to publish your article to Hashnode",
+      status: "error",
+    });
   }
 }

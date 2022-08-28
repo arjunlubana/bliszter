@@ -1,5 +1,6 @@
+import { Button, Input, Stack, useToast } from "@chakra-ui/react";
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import ReactMde, { Suggestion } from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import * as Showdown from "showdown";
@@ -8,6 +9,12 @@ import Layout from "../../layouts";
 import DashboardLayout from "../../layouts/dashboard";
 import { poster } from "../../utils";
 import type { NextPageWithLayout } from "../_app";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
 
 const loadSuggestions = async (text: string) => {
   return new Promise<Suggestion[]>((accept, reject) => {
@@ -42,10 +49,12 @@ const converter = new Showdown.Converter({
   tasklists: true,
 });
 const Editor: NextPageWithLayout = () => {
-  const [value, setValue] = React.useState("**Hello world!!!**");
+  const toast = useToast();
+  const [markdown, setMarkdown] = React.useState("**Hello world!!!**");
   const [selectedTab, setSelectedTab] = React.useState<"write" | "preview">(
     "write"
   );
+  const [title, setTitle] = useState("");
 
   // const save: SaveImageHandler = async function*(data: ArrayBuffer) {
   //   // Promise that waits for "time" milliseconds
@@ -71,42 +80,70 @@ const Editor: NextPageWithLayout = () => {
 
   const onPublish = async (e) => {
     e.preventDefault();
-    const form = new FormData(e.target);
-    const formData = Object.fromEntries(form.entries());
-    formData.markdown = value;
-    const devto = await poster("/api/devto/post-article", formData);
-    const hashnode = await poster("/api/hashnode/post-article", formData);
-    const medium = await poster("/api/medium/post-article", formData);
+    let data = {
+      title,
+      markdown,
+    };
+    const devto = await poster("/api/devto/post-article", data);
+    toast({
+      ...devto,
+      duration: 3000,
+      isClosable: true,
+    });
+    const hashnode = await poster("/api/hashnode/post-article", data);
+    toast({
+      ...hashnode,
+      duration: 3000,
+      isClosable: true,
+    });
+    const medium = await poster("/api/medium/post-article", data);
+    toast({
+      ...medium,
+      duration: 3000,
+      isClosable: true,
+    });
     await poster("/api/save-to-redis", {
-      title: formData.title,
-      markdown: formData.markdown,
+      title: data.title,
+      markdown: data.markdown,
       medium_url: medium.url,
       hashnode_url: hashnode.url,
       devto_url: devto.url,
     });
   };
+
   return (
     <ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
-      <form onSubmit={onPublish}>
-        <label htmlFor="title">Title</label>
-        <input type="text" name="title" />
-        <input type="submit" value="Publish" />
+      <form>
+        <Input
+          variant="flushed"
+          placeholder="Give your story a title..."
+          size="lg"
+          name="title"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+        <ReactMde
+          value={markdown}
+          onChange={setMarkdown}
+          selectedTab={selectedTab}
+          onTabChange={setSelectedTab}
+          generateMarkdownPreview={(markdown) =>
+            Promise.resolve(converter.makeHtml(markdown))
+          }
+          loadSuggestions={loadSuggestions}
+          childProps={{
+            writeButton: {
+              tabIndex: -1,
+            },
+          }}
+          minEditorHeight={300}
+          maxEditorHeight={600}
+        />
+        <Button colorScheme="orange" m={1} onClick={onPublish}>
+          Publish
+        </Button>
       </form>
-      <ReactMde
-        value={value}
-        onChange={setValue}
-        selectedTab={selectedTab}
-        onTabChange={setSelectedTab}
-        generateMarkdownPreview={(markdown) =>
-          Promise.resolve(converter.makeHtml(markdown))
-        }
-        loadSuggestions={loadSuggestions}
-        childProps={{
-          writeButton: {
-            tabIndex: -1,
-          },
-        }}
-      />
     </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
   );
 };

@@ -18,7 +18,7 @@ export default async function handler(req: SessionRequest, res: any) {
     },
   });
   try {
-    const result = await client.mutate({
+    const response = await client.mutate({
       mutation: gql`
         mutation CREATE_POST($title: String!, $body: String!) {
           createPublicationStory(
@@ -48,7 +48,16 @@ export default async function handler(req: SessionRequest, res: any) {
         body: req.body.markdown,
       },
     });
+    res.status(200).json({
+      ...response.data,
+      title: "Published to Hashnode",
+      status: "success",
+    });
   } catch (error) {
-    res.status(200).json({ message: "failesd to publish to hashnode" });
+    res.status(200).json({
+      title: "Failed to publish article",
+      description: "We are unable to publish your article to Hashnode",
+      status: "error",
+    });
   }
 }
