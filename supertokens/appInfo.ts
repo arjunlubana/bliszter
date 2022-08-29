@@ -1,7 +1,15 @@
-export const appInfo = {
-    appName: "bliszter",
-    apiDomain: `${process.env.VERCEL_URL}`,
-    websiteDomain: `${process.env.VERCEL_URL}`,
-    apiBasePath: "/api/auth",
-    websiteBasePath: "/auth",
-  };
+const port = process.env.APP_PORT || 3000
+
+const apiBasePath = '/api/auth/'
+
+export const websiteDomain =
+  process.env.APP_URL ||
+  process.env.NEXT_PUBLIC_APP_URL ||
+  `http://localhost:${port}`
+
+  export const appInfo = {
+    appName: 'Bliszter',
+    websiteDomain,
+    apiDomain: websiteDomain,
+    apiBasePath,
+  }
