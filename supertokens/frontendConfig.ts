@@ -1,6 +1,12 @@
 import ThirdPartyEmailPasswordReact from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import SessionReact from "supertokens-auth-react/recipe/session";
-import { appInfo } from "./appInfo";
+export const appInfo = {
+  appName: "bliszter",
+  apiDomain: window.location.origin,
+  websiteDomain: window.location.origin,
+  apiBasePath: "/api/auth",
+  websiteBasePath: "/auth",
+};
 
 export const frontendConfig = () => {
   return {

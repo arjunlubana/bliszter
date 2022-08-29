@@ -1,9 +1,15 @@
 import ThirdPartyEmailPasswordNode from "supertokens-node/recipe/thirdpartyemailpassword";
 import SessionNode from "supertokens-node/recipe/session";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
-
-import { appInfo } from "./appInfo";
 import { TypeInput } from "supertokens-node/types";
+
+export const appInfo = {
+  appName: "bliszter",
+  apiDomain: `${process.env.VERCEL_URL}`,
+  websiteDomain: `${process.env.VERCEL_URL}`,
+  apiBasePath: "/api/auth",
+  websiteBasePath: "/auth",
+};
 
 export const backendConfig = (): TypeInput => {
   const connectionURI = process.env.SUPERTOKENS_CONN_URI;
