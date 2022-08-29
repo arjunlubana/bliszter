@@ -1,7 +1,12 @@
 import { Divider, Grid, GridItem, Stack } from "@chakra-ui/react";
+import { ReactNode } from "react";
 import Sidebar from "../components/sidebar";
 
-export default function DashboardLayout({ children }) {
+type DashboardProps = {
+  children: ReactNode
+}
+
+export default function DashboardLayout(props: DashboardProps) {
   return (
     <Grid h="100%" templateColumns="repeat(6, 1fr)" gap={4}>
       <GridItem colSpan={1} h={"100%"} position={"fixed"}>
@@ -16,7 +21,7 @@ export default function DashboardLayout({ children }) {
         m="2em"
         maxWidth={{ base: "100%", md: "80%" }}
       >
-        {children}
+        {props.children}
       </GridItem>
     </Grid>
   );

@@ -29,7 +29,7 @@ const articleRepository = redis.fetchRepository(articleSchema);
   await articleRepository.createIndex();
 })();
 
-async function createArticle(article) {
+async function createArticle(article: any) {
   const id = await articleRepository.createAndSave(article);
   return id;
 }

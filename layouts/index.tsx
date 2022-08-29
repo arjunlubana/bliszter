@@ -4,7 +4,13 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import LoginLogout from "../components/login-logout";
 
-export default function Layout({ children }) {
+import { ReactNode } from "react";
+
+type LayoutProps = {
+  children: ReactNode;
+};
+
+export default function Layout(props: LayoutProps) {
   return (
     <ChakraProvider>
       <Grid
@@ -31,7 +37,7 @@ export default function Layout({ children }) {
             </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
           </Header>
         </GridItem>
-        <GridItem area={"main"}>{children}</GridItem>
+        <GridItem area={"main"}>{props.children}</GridItem>
         <GridItem area={"footer"} p={"1em"}>
           <Divider />
           <Footer />

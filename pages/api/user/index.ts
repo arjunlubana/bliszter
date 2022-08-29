@@ -10,8 +10,8 @@ export default async function user(req: SessionRequest, res: any) {
   // if it comes here, it means that the session verification was successful
   return res.json({
     note: "Fetch any data from your application for authenticated user after using verifySession middleware",
-    userId: req.session.getUserId(),
-    sessionHandle: req.session.getHandle(),
-    userDataInAccessToken: req.session.getAccessTokenPayload(),
+    userId: req.session?.getUserId(),
+    sessionHandle: req.session?.getHandle(),
+    userDataInAccessToken: req.session?.getAccessTokenPayload(),
   });
 }
