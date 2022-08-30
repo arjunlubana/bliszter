@@ -12,15 +12,7 @@ export let frontendConfig = () => {
   return {
     appInfo,
     recipeList: [
-      ThirdPartyEmailPasswordReact.init({
-        signInAndUpFeature: {
-          providers: [
-            ThirdPartyEmailPasswordReact.Google.init(),
-            ThirdPartyEmailPasswordReact.Github.init(),
-            ThirdPartyEmailPasswordReact.Apple.init(),
-          ],
-        },
-      }),
+      ThirdPartyEmailPasswordReact.init({}),
       SessionReact.init(),
     ],
     // this is so that the SDK uses the next router for navigation
