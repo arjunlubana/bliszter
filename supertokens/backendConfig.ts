@@ -3,7 +3,7 @@ import SessionNode from "supertokens-node/recipe/session";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { TypeInput } from "supertokens-node/types";
 
-const apiDomain = process.env.VERCEL_URL !== undefined ? process.env.VERCEL_URL : `http://localhost:3000`;
+export const apiDomain = process.env.VERCEL_URL !== undefined ? process.env.VERCEL_URL : `http://localhost:3000`;
 const websiteDomain = process.env.VERCEL_URL !== undefined ? process.env.VERCEL_URL : `http://localhost:3000`;
 
 export const backendConfig = (): TypeInput => {
