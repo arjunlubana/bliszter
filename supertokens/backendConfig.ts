@@ -3,7 +3,7 @@ import SessionNode from "supertokens-node/recipe/session";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { TypeInput } from "supertokens-node/types";
 
-const apiDomain = process.env.VERCEL_URL !== undefined ? process.env.VERCEL_URL : `http://localhost:3001`;
+const apiDomain = process.env.VERCEL_URL !== undefined ? process.env.VERCEL_URL : `http://localhost:3000`;
 const websiteDomain = process.env.VERCEL_URL !== undefined ? process.env.VERCEL_URL : `http://localhost:3000`;
 
 export const backendConfig = (): TypeInput => {
@@ -17,10 +17,10 @@ export const backendConfig = (): TypeInput => {
       apiKey,
     },
     appInfo: {
-      appName: "SuperTokens Demo App", // TODO: Your app name
+      appName: "Bliszter",
       apiDomain,
       websiteDomain,
-      apiBasePath: "/api/auth",
+      apiBasePath: "/api/auth/",
       websiteBasePath: "/auth",
   },
     recipeList: [
