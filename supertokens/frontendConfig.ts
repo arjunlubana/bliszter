@@ -13,9 +13,6 @@ export let frontendConfig = () => {
     appInfo,
     recipeList: [
       ThirdPartyEmailPasswordReact.init({
-        emailVerificationFeature: {
-          mode: 'REQUIRED',
-        },
         signInAndUpFeature: {
           providers: [
             ThirdPartyEmailPasswordReact.Google.init(),
