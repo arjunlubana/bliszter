@@ -1,9 +1,14 @@
 import ThirdPartyEmailPasswordReact from 'supertokens-auth-react/recipe/thirdpartyemailpassword'
 import SessionReact from 'supertokens-auth-react/recipe/session'
-import { appInfo } from './appInfo'
 import Router from 'next/router'
 
 export let frontendConfig = () => {
+  const appInfo = {
+    appName: 'SuperTokens Demo App',
+    websiteDomain: window.location.origin,
+    apiDomain: window.location.origin,
+    apiBasePath: '/api/auth/',
+  }
   return {
     appInfo,
     recipeList: [
