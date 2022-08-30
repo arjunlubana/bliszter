@@ -1,15 +1,10 @@
-const port = process.env.APP_PORT || 3000
-
 const apiBasePath = '/api/auth/'
 
-export const websiteDomain =
-  process.env.APP_URL ||
-  process.env.NEXT_PUBLIC_APP_URL ||
-  `http://localhost:${port}`
+export const websiteDomain = process.env.VERCEL_URL || window.location.origin
 
-  export const appInfo = {
-    appName: 'Bliszter',
-    websiteDomain,
-    apiDomain: websiteDomain,
-    apiBasePath,
-  }
+export const appInfo = {
+  appName: 'Bliszter',
+  websiteDomain,
+  apiDomain: websiteDomain,
+  apiBasePath,
+}
