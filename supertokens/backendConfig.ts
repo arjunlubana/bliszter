@@ -2,10 +2,7 @@ import ThirdPartyEmailPasswordNode from "supertokens-node/recipe/thirdpartyemail
 import SessionNode from "supertokens-node/recipe/session";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { TypeInput } from "supertokens-node/types";
-
-export const apiDomain = process.env.VERCEL_URL !== undefined ? process.env.VERCEL_URL : `http://localhost:3000`;
-const websiteDomain = process.env.VERCEL_URL !== undefined ? process.env.VERCEL_URL : `http://localhost:3000`;
-
+import { appInfo } from "./appInfo";
 export const backendConfig = (): TypeInput => {
   const connectionURI = process.env.SUPERTOKENS_CONN_URI;
   const apiKey = process.env.SUPERTOKENS_API_KEY;
@@ -16,13 +13,7 @@ export const backendConfig = (): TypeInput => {
       connectionURI: `${connectionURI}`,
       apiKey,
     },
-    appInfo: {
-      appName: "Bliszter",
-      apiDomain,
-      websiteDomain,
-      apiBasePath: "/api/auth/",
-      websiteBasePath: "/auth",
-  },
+    appInfo,
     recipeList: [
       ThirdPartyEmailPasswordNode.init({
         providers: [

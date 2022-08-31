@@ -5,7 +5,7 @@ import React from "react";
 import SuperTokensReact, { SuperTokensWrapper } from "supertokens-auth-react";
 import Session from "supertokens-auth-react/recipe/session";
 import { redirectToAuth } from "supertokens-auth-react/recipe/thirdpartyemailpassword";
-import { frontendConfig } from "../supertokens/frontendConfig";
+import * as SuperTokensConfig from '../supertokens/frontendConfig'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -17,7 +17,7 @@ type AppPropsWithLayout = AppProps & {
 
 if (typeof window !== "undefined") {
   // we only want to call this init function on the frontend, so we check typeof window !== 'undefined'
-  SuperTokensReact.init(frontendConfig());
+  SuperTokensReact.init(SuperTokensConfig.frontendConfig());
 }
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
