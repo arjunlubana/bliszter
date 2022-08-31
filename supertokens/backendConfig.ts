@@ -3,9 +3,11 @@ import SessionNode from "supertokens-node/recipe/session";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { TypeInput } from "supertokens-node/types";
 import { appInfo } from "./appInfo";
+
+const connectionURI = process.env.SUPERTOKENS_URL;
+const apiKey = process.env.SUPERTOKENS_APIKEY;
+
 export const backendConfig = (): TypeInput => {
-  const connectionURI = process.env.SUPERTOKENS_CONN_URI;
-  const apiKey = process.env.SUPERTOKENS_API_KEY;
   return {
     framework: "express",
     supertokens: {
@@ -15,27 +17,7 @@ export const backendConfig = (): TypeInput => {
     },
     appInfo,
     recipeList: [
-      ThirdPartyEmailPasswordNode.init({
-        providers: [
-          // Third Party Authentication providers
-          ThirdPartyEmailPasswordNode.Google({
-            clientId: `${process.env.GOOGLE_AUTH_CLIENT_ID}`,
-            clientSecret: `${process.env.GOOGLE_AUTH_CLIENT_SECRET}`,
-          }),
-          ThirdPartyEmailPasswordNode.Github({
-            clientId: `${process.env.GITHUB_AUTH_CLIENT_ID}`,
-            clientSecret: `${process.env.GITHUB_AUTH_CLIENT_SECRET}`,
-          }),
-          ThirdPartyEmailPasswordNode.Apple({
-            clientId: `${process.env.APPLE_AUTH_CLIENT_ID}`,
-            clientSecret: {
-              keyId: `${process.env.APPLE_AUTH_KEY_ID}`,
-              privateKey: `${process.env.APPLE_AUTH_PRIVATE_KEY}`,
-              teamId: `${process.env.APPLE_AUTH_TEAM_ID}`,
-            },
-          }),
-        ],
-      }),
+      ThirdPartyEmailPasswordNode.init({}),
       SessionNode.init(),
       UserMetadata.init(),
     ],
