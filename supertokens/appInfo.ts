@@ -9,7 +9,7 @@ const websiteDomain =
 
     console.log(websiteDomain)
 const appInfo = {
-  appName: 'SuperTokens Demo App',
+  appName: 'Bliszter',
   websiteDomain,
   apiDomain: websiteDomain,
   apiBasePath,

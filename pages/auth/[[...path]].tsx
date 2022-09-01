@@ -20,7 +20,7 @@ export default function Auth() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>SuperTokens 💫</title>
+        <title>Bliszter 💫</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
