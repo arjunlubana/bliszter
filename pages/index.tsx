@@ -30,7 +30,7 @@ const Home: NextPageWithLayout = () => {
             Write Once Publish Anywhere
           </Text>
           <NextLink href="/auth" passHref>
-            <Button as="a" href="/Dashboard" colorScheme={"orange"} variant="outline">
+            <Button as="a" href="/dashboard" colorScheme={"orange"} variant="outline">
               Dashboard
             </Button>
           </NextLink>
