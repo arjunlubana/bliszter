@@ -1,17 +1,28 @@
 import { Box, Flex, Tag, TagLabel, Text } from "@chakra-ui/react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <Flex direction={"column"} justify={"center"} align={"center"}>
       <Text mt={"0.5em"}>Made with 🧡️ Arjun Lubana</Text>
-      <Box m={"5px"}>
-        <Tag size="md" colorScheme="red" borderRadius="full">
-          <TagLabel>Powered by Redis</TagLabel>
+      <Flex direction={"column"} justify={"center"} align={"center"} >
+        <Tag size="lg" colorScheme="red" borderRadius="full" m="2">
+          <TagLabel >Powered by Redis</TagLabel>
         </Tag>
-        <Tag size="md" colorScheme="black" borderRadius="full">
-          <TagLabel>Deployed by Vercel</TagLabel>
+        <Tag size="sm" colorScheme="green" borderRadius="full" mb="2">
+          <TagLabel display={"flex"} justifyContent={"center"}>
+            Deployed by
+            <span>
+              <Image
+                src="/vercel.svg"
+                alt="Vercel Logo"
+                width={72}
+                height={16}
+              />
+            </span>
+          </TagLabel>
         </Tag>
-      </Box>
+      </Flex>
     </Flex>
   );
 }

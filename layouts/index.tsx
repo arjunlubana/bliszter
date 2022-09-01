@@ -1,8 +1,8 @@
 import { ChakraProvider, Divider, Grid, GridItem } from "@chakra-ui/react";
-// import ThirdPartyEmailPassword from "supertokens-auth-react/recipe/thirdpartyemailpassword";
 import Footer from "../components/footer";
 import Header from "../components/header";
-// import LoginLogout from "../components/login-logout";
+import theme from "./themes/theme";
+import '@fontsource/poppins/400.css'
 
 import { ReactNode } from "react";
 
@@ -12,14 +12,14 @@ type LayoutProps = {
 
 export default function Layout(props: LayoutProps) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Grid
         templateAreas={`"header header"
                   "main main"
                   "footer footer"`}
         gridTemplateRows={"10vh 1fr 15vh"}
         gridTemplateColumns={"150px 1fr"}
-        h="100vh"
+        h="90vh"
         color="blackAlpha.700"
         fontWeight="bold"
       >
