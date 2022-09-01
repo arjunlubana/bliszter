@@ -7,6 +7,7 @@ const websiteDomain =
     process.env.VERCEL_URL ||
     `http://localhost:${port}`
 
+    console.log(websiteDomain)
 const appInfo = {
   appName: 'SuperTokens Demo App',
   websiteDomain,
