@@ -2,7 +2,7 @@ import { ChakraProvider, Divider, Grid, GridItem } from "@chakra-ui/react";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import theme from "./themes/theme";
-import '@fontsource/poppins/400.css'
+import "@fontsource/poppins/400.css";
 
 import { ReactNode } from "react";
 
@@ -31,11 +31,7 @@ export default function Layout(props: LayoutProps) {
           w={"100%"}
           zIndex="100"
         >
-          <Header>
-            {/* <ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth>
-              <LoginLogout />
-            </ThirdPartyEmailPassword.ThirdPartyEmailPasswordAuth> */}
-          </Header>
+          <Header />
         </GridItem>
         <GridItem area={"main"}>{props.children}</GridItem>
         <GridItem area={"footer"} p={"1em"}>

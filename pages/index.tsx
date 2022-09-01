@@ -29,8 +29,8 @@ const Home: NextPageWithLayout = () => {
           <Text fontFamily={"Qwitcher Grypen"} fontSize="3xl">
             Write Once Publish Anywhere
           </Text>
-          <NextLink href="/auth" passHref>
-            <Button as="a" href="/dashboard" colorScheme={"orange"} variant="outline">
+          <NextLink href="/dashboard" passHref>
+            <Button as="a" colorScheme={"orange"} variant="outline">
               Dashboard
             </Button>
           </NextLink>
